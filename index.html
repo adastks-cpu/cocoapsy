@@ -218,7 +218,7 @@
     function submit() {
       const est = parseInt(document.getElementById('estimate').value, 10);
       if (!choice || !est) return;
-    fetch('https://https://script.google.com/macros/s/AKfycbxrn3ryhVMpT59SMfoP-aryxtbQ4HNQOzvuJva3YRA/dev/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbxrn3ryhVMpT59SMfoP-aryxtbQ4HNQOzvuJva3YRA/dev/exec', {
     method: 'POST',
     body: JSON.stringify({ anchor, choice, estimate: est }),
     headers: { 'Content-Type': 'application/json' }
@@ -236,7 +236,6 @@
   })
   .catch(() => alert('Network error – please try again.'));
 }
-    }
 
     function renderTable() {
       const tbody = document.getElementById('data-body');
