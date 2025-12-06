@@ -218,16 +218,24 @@
     function submit() {
       const est = parseInt(document.getElementById('estimate').value, 10);
       if (!choice || !est) return;
-      rows.push({ anchor, choice, estimate: est });
-      renderTable();
-      // reset for next participant
-      choice = '';
-      document.getElementById('underBtn').classList.remove('active');
-      document.getElementById('overBtn').classList.remove('active');
-      document.getElementById('estimate').value = '';
-      document.getElementById('submitBtn').disabled = true;
-      document.getElementById('estimate').disabled = true;
-      alert('Thank you! Your answer has been recorded.');
+    fetch('https://https://script.google.com/macros/s/AKfycbxrn3ryhVMpT59SMfoP-aryxtbQ4HNQOzvuJva3YRA/dev/exec', {
+    method: 'POST',
+    body: JSON.stringify({ anchor, choice, estimate: est }),
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(r => r.text())
+  .then(() => {
+    alert('Thank you! Your answer has been recorded.');
+    // reset form
+    choice = '';
+    document.getElementById('underBtn').classList.remove('active');
+    document.getElementById('overBtn').classList.remove('active');
+    document.getElementById('estimate').value = '';
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('estimate').disabled = true;
+  })
+  .catch(() => alert('Network error – please try again.'));
+}
     }
 
     function renderTable() {
